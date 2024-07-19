@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Search Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Game Search Results</h1>
+    </header>
+
+    <main>
+        <form method="GET" action="{% url 'search' %}" class="search-form">
+            <label for="query">Enter keyword</label>
+            <input type="text" id="query" name="query" placeholder="Enter keyword" value="{{request.GET.query}}">
+            <button type="submit">Search</button>
+        </form>
+
+        <ul class="results-list">
+            {% if results %}
+                {% for document in results %}
+                    <li class="results-item">{{ document.word }}: {{ document.description }}</li>
+                {% endfor %}
+            {% else %}
+                <li class="no-results">No results found.</li>
+            {% endif %}
+        </ul>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Visual Wizards Website</p>
+    </footer>
+</body>
+</html>
